@@ -12,6 +12,6 @@ class PostController extends Controller
     public function index(){
         // this resource is a wraper in top of the eloquent  respose,it will transform each field in anything you want,
         // Eg the data in any format we want, date formated, paragraphs
-        return PostResource::collection(Post::all());
+        return PostResource::collection(Post::paginate(10));
     }
 }

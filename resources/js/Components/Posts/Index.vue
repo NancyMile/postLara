@@ -10,7 +10,7 @@ export default {
         const { posts, getPosts } = usePosts()
 
         onMounted(getPosts)
-            return {posts}
+            return {posts, getPosts}
     }
 }
 </script>
@@ -36,7 +36,7 @@ export default {
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 divide-solid">
-                <tr v-for="post in posts">
+                <tr v-for="post in posts.data">
                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         {{ post.id }}
                     </td>
@@ -52,6 +52,11 @@ export default {
                 </tr>
                 </tbody>
             </table>
+            <Pagination
+                class="mt-3"
+                :data="posts"
+                @pagination-change-page="getPosts"
+            />
         </div>
     </div>
 </template>
