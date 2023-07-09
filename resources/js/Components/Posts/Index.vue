@@ -1,22 +1,42 @@
 <script>
 
 import usePosts from '../../composables/posts'
-import { onMounted } from 'vue';
+import useCategories from '../../composables/categories'
+import { ref, onMounted } from 'vue';
 
 
 export default {
 
     setup() {
+        const selectedCategory = ref('')
         const { posts, getPosts } = usePosts()
+        const { categories, getCategories } = useCategories()
 
-        onMounted(getPosts)
-            return {posts, getPosts}
+
+        onMounted(() => {
+            getPosts()
+            getCategories()
+        })
+        return {
+            posts,
+            getPosts,
+            categories
+        }
     }
 }
 </script>
     
 <template>
     <div class="overflow-hidden overflow-x-auto p-6 bg-white border-gray-200">
+        <div class="mb-4">
+            <select
+                v-model="selectedCategory"
+                class="block mt-1 w-full"
+            >
+                <option value="" selected>-- Select --</option>
+                <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
+            </select>
+        </div>
         <div class="min-w-full align-middle">
             <table class="min-w-full divide-y divide-gray-200 border">
                 <thead>
