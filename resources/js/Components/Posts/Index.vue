@@ -2,7 +2,7 @@
 
 import usePosts from '../../composables/posts'
 import useCategories from '../../composables/categories'
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 
 
 export default {
@@ -17,10 +17,17 @@ export default {
             getPosts()
             getCategories()
         })
+
+
+        watch(selectedCategory, (current, previous) => {
+            getPosts(1, current)
+        })
+
         return {
             posts,
             getPosts,
-            categories
+            categories,
+            selectedCategory
         }
     }
 }
