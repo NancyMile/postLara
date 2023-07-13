@@ -36,7 +36,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::resource('posts',PostController::class);
-Route::inertia('about','Posts/About')->name('about');
+Route::middleware('auth')->group(function () {
+    Route::resource('posts',PostController::class);
+    Route::inertia('about','Posts/About')->name('about');
+});
 
 require __DIR__.'/auth.php';
