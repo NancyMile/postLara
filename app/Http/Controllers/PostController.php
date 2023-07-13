@@ -35,4 +35,12 @@ class PostController extends Controller
 
         return inertia('Posts/Index', compact('posts'));
     }
+
+    public function create(){
+        return inertia('Posts/Create');
+    }
+
+    public function show(){
+
+    }
 }
