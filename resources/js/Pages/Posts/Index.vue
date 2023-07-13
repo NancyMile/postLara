@@ -4,6 +4,7 @@ import { Head, Link } from '@inertiajs/vue3';
 import usePosts from '../../composables/posts'
 import useCategories from '../../composables/categories'
 import { ref, onMounted, watch } from 'vue';
+import { Inertia } from '@inertiajs/inertia'
 
 export default {
     components: {
@@ -39,6 +40,11 @@ export default {
             getPosts(1, selectedCategory.value, orderColumn.value, orderDirection.value);
         }
 
+        const destroy = (id) => {
+            if (confirm('Are you sure?')) {
+                Inertia.delete(route('posts.destroy',id))
+            }
+        }
 
         return {
             posts,
@@ -47,7 +53,8 @@ export default {
             selectedCategory,
             orderColumn,
             orderDirection,
-            updateSort
+            updateSort,
+            destroy
         }
     }
 }
@@ -145,6 +152,8 @@ export default {
                             </div>
                         </div>
                     </th>
+                    <th class="px-6 py-3 bg-gray-50 text-left">
+                    </th>
                 </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 divide-solid">
@@ -163,6 +172,15 @@ export default {
                     </td>
                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         {{ post.created_at }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                        <button
+                        type="button"
+                        @click="destroy(post.id)"
+                        class=" inline-block  font-bold text-center uppercase border text-xs rounded-lg bg-red-500 text-white p-4 mb-4 hover:bg-red-800"
+                    >
+                        Delete
+                    </button>
                     </td>
                 </tr>
                 </tbody>

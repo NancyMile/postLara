@@ -47,6 +47,12 @@ class PostController extends Controller
             ->with('message','Post created sucessfully');
     }
 
+    public function destroy(Post $post){
+        $post->delete();
+         return redirect()->route('posts.index')
+            ->with('message', 'Post deleted succesfully.');
+    }
+
     public function show(){
 
     }
