@@ -1,5 +1,5 @@
 <script>
-
+import { Link } from '@inertiajs/vue3';
 import usePosts from '../../composables/posts'
 import useCategories from '../../composables/categories'
 import { ref, onMounted, watch } from 'vue';
@@ -7,47 +7,60 @@ import { ref, onMounted, watch } from 'vue';
 
 export default {
 
-    setup() {
-        const selectedCategory = ref('')
-        const orderColumn = ref('created_at')
-        const orderDirection = ref('desc')
-        const { posts, getPosts } = usePosts()
-        const { categories, getCategories } = useCategories()
+    components: {
+        Link
+    },
 
-
-        onMounted(() => {
-            getPosts()
-            getCategories()
-        })
-
-
-        watch(selectedCategory, (current, previous) => {
-            getPosts(1, current)
-        })
-
-        const updateSort = (column) => {
-            orderColumn.value = column;
-            orderDirection.value = (orderDirection.value === 'asc' ? 'desc' : 'asc')
-            getPosts(1, selectedCategory.value, orderColumn.value, orderDirection.value);
-        }
-
-
-        return {
-            posts,
-            getPosts,
-            categories,
-            selectedCategory,
-            orderColumn,
-            orderDirection,
-            updateSort
-        }
+    props: {
+        posts: Object
     }
+
+    // setup() {
+    //     const selectedCategory = ref('')
+    //     const orderColumn = ref('created_at')
+    //     const orderDirection = ref('desc')
+    //     const { posts, getPosts } = usePosts()
+    //     const { categories, getCategories } = useCategories()
+
+
+    //     onMounted(() => {
+    //         getPosts()
+    //         getCategories()
+    //     })
+
+
+    //     watch(selectedCategory, (current, previous) => {
+    //         getPosts(1, current)
+    //     })
+
+    //     const updateSort = (column) => {
+    //         orderColumn.value = column;
+    //         orderDirection.value = (orderDirection.value === 'asc' ? 'desc' : 'asc')
+    //         getPosts(1, selectedCategory.value, orderColumn.value, orderDirection.value);
+    //     }
+
+
+    //     return {
+    //         posts,
+    //         getPosts,
+    //         categories,
+    //         selectedCategory,
+    //         orderColumn,
+    //         orderDirection,
+    //         updateSort
+    //     }
+    // }
 }
 </script>
     
 <template>
+    <div class="sm:flex gap-4 sm:top-0 sm:left-0  p-6 text-right z-10">
+            <Link href="posts" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</Link>
+            <Link href="about" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">About</Link>
+        </div>
     <div class="overflow-hidden overflow-x-auto p-6 bg-white border-gray-200">
-        <div class="mb-4">
+        
+        <div class="mb-4 w-1/4">
             <select
                 v-model="selectedCategory"
                 class="block mt-1 w-full"
