@@ -1,9 +1,16 @@
 <script>
 import { Link } from '@inertiajs/vue3';
+import { InertiaProgress } from '@inertiajs/progress';
 import usePosts from '../../composables/posts'
 import useCategories from '../../composables/categories'
 import { ref, onMounted, watch } from 'vue';
 
+InertiaProgress.init({
+    delay: 250,
+    color: '#29d',
+    includesCSS: true,
+    showSpinner: true
+})
 
 export default {
 
