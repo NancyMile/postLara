@@ -42,7 +42,8 @@ class HandleInertiaRequests extends Middleware
             },
             'flash' => [
                 'message' => session('message')
-            ]
+            ],
+            'permissions' => auth()->user()->permissions ?? []
         ]);
     }
 }

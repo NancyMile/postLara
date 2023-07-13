@@ -13,7 +13,8 @@ export default {
         Link
     },
     props: {
-        posts: Object
+        posts: Object,
+        permissions: Object,
     },
 
     setup() {
@@ -65,7 +66,7 @@ export default {
         <title>Posts</title>
     </Head>
     <AppLayout>
-        <Link :href="route('posts.create')"
+        <Link v-if="permissions.posts_manage"  :href="route('posts.create')"
             class=" uppercase border md:w-16 text-xs  rounded-lg bg-blue-500  text-white p-2 flex mb-4 font-semibold text-gray-600  on hover:bg-blue-800">Create</Link>
         <div class="mb-4 w-1/4">
             <select
@@ -173,7 +174,7 @@ export default {
                     <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         {{ post.created_at }}
                     </td>
-                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                    <td v-if="permissions.posts_manage" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         <button
                         type="button"
                         @click="destroy(post.id)"
@@ -182,7 +183,7 @@ export default {
                         Delete
                     </button>
                     </td>
-                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                    <td v-if="permissions.posts_manage" class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
                         <Link
                         :href="route('posts.edit',post.id)"
                         class=" inline-block  font-bold text-center uppercase border text-xs rounded-lg bg-blue-500 text-white p-4 mb-4 hover:bg-blue-800"
