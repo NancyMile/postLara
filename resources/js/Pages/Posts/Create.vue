@@ -10,6 +10,9 @@ export default {
         Head,
         Link
     },
+    props: {
+        errors: Object
+    },
 
     setup() {
         const form = useForm({
@@ -50,16 +53,19 @@ export default {
                         id="title"
                         v-model="form.title"
                     />
+                    <p v-if="errors.title" class=" text-red-500 font-bold">{{ errors.title }}</p>
                 </div>
                 <div class="mb-4 content-center">
                     <label  class=" block font-bold aling-center text-lg" for="title">Category</label>
                     <select
+                        id="category_id"
                         v-model="form.category_id"
                         class="block mt-1 w-full"
                     >
                         <option value="" selected>-- Select --</option>
                         <option v-for="category in categories" :value="category.id">{{ category.name }}</option>
                     </select>
+                    <p v-if="errors.category_id" class=" text-red-500 font-bold">{{ errors.category_id }}</p>
                 </div>
                 <div class="mb-4">
                     <label  class="aling-center text-lg font-bold" for="title">Content</label>
@@ -69,6 +75,7 @@ export default {
                         id="content"
                         v-model="form.content"
                     ></textarea>
+                    <p  v-if="errors.content" class=" text-red-500 font-bold">{{ errors.content }}</p>
                 </div>
                 <div class="w-1/2 flex gap-2">
                     <button

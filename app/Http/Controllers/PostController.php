@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
 use App\Http\Resources\PostResource;
+use App\Http\Requests\StorePostRequest;
 
 class PostController extends Controller
 {
@@ -40,12 +40,8 @@ class PostController extends Controller
         return inertia('Posts/Create');
     }
 
-    public function store(Request $request){
-        Post::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'category_id' => $request->category_id
-        ]);
+    public function store(StorePostRequest $request){
+        Post::create($request->validated());
 
         return redirect()->route('posts.index');
     }
