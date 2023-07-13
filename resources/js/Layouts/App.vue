@@ -19,7 +19,14 @@ export default {
             <Link href="login"
                 :class="{'ont-bold text-red-500': $page.component === 'login'}"
                 class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login</Link>
-
+            <Link
+                :href="route('logout')"
+                method="post"
+                as="button"
+                class=" font-semibold text-sm text-gray-600 hover:text-gray-900 rounded-md"
+                >
+                Log Out
+            </Link>
     </div>
     <div class="overflow-hidden overflow-x-auto p-6 bg-white border-gray-200">
         <div v-if="$page.props.flash.message " class="text-white p-3  uppercase rounded-lg bg-green-300 mb-4 text  font-bold  text-lg text-center">
