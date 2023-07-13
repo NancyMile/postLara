@@ -1,12 +1,14 @@
 <script>
-import AppLayout from "../../Layouts/App.vue"
+import AppLayout from '../../Layouts/App.vue';
+import { Head } from '@inertiajs/vue3';
 import usePosts from '../../composables/posts'
 import useCategories from '../../composables/categories'
 import { ref, onMounted, watch } from 'vue';
 
 export default {
     components: {
-        AppLayout
+        AppLayout,
+        Head
     },
     props: {
         posts: Object
@@ -51,6 +53,9 @@ export default {
 </script>
     
 <template>
+    <Head>
+        <title>Posts</title>
+    </Head>
     <AppLayout>
         <div class="mb-4 w-1/4">
             <select
