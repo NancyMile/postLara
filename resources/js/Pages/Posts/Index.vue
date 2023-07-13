@@ -182,6 +182,14 @@ export default {
                         Delete
                     </button>
                     </td>
+                    <td class="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-900">
+                        <Link
+                        :href="route('posts.edit',post.id)"
+                        class=" inline-block  font-bold text-center uppercase border text-xs rounded-lg bg-blue-500 text-white p-4 mb-4 hover:bg-blue-800"
+                    >
+                        Edit
+                    </Link>
+                    </td>
                 </tr>
                 </tbody>
             </table>

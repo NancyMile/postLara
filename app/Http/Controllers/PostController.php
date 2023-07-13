@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Resources\PostResource;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Auth\Events\Validated;
 
 class PostController extends Controller
 {
@@ -51,6 +52,17 @@ class PostController extends Controller
         $post->delete();
          return redirect()->route('posts.index')
             ->with('message', 'Post deleted succesfully.');
+    }
+
+    public function edit(Post $post){
+        return inertia('Posts/Edit',compact('post'));
+    }
+
+    public function update(Post $post, StorePostRequest $request){
+        $post->update($request->validated());
+        return redirect()->route('posts.index')
+            ->with('message', 'Post updated ');
+
     }
 
     public function show(){
