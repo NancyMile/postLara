@@ -80,6 +80,7 @@ export default {
                 <div class="w-1/2 flex gap-2">
                     <button
                         type="submit"
+                        :disabled="form.processing"
                         class=" inline-block uppercase border w-full text-xs rounded-lg bg-blue-500 text-white p-4 mb-4 hover:bg-blue-800"
                     >
                         Save
