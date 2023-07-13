@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
@@ -39,6 +40,9 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'flash' => [
+                'message' => session('message')
+            ]
         ]);
     }
 }
