@@ -40,6 +40,16 @@ class PostController extends Controller
         return inertia('Posts/Create');
     }
 
+    public function store(Request $request){
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category_id
+        ]);
+
+        return redirect()->route('posts.index');
+    }
+
     public function show(){
 
     }
