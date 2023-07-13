@@ -1,6 +1,6 @@
 <script>
 import AppLayout from '../../Layouts/App.vue';
-import { Head } from '@inertiajs/vue3';
+import { Head, Link } from '@inertiajs/vue3';
 import usePosts from '../../composables/posts'
 import useCategories from '../../composables/categories'
 import { ref, onMounted, watch } from 'vue';
@@ -8,7 +8,8 @@ import { ref, onMounted, watch } from 'vue';
 export default {
     components: {
         AppLayout,
-        Head
+        Head,
+        Link
     },
     props: {
         posts: Object
@@ -57,6 +58,8 @@ export default {
         <title>Posts</title>
     </Head>
     <AppLayout>
+        <Link :href="route('posts.create')"
+            class=" uppercase border md:w-16 text-xs  rounded-lg bg-blue-500  text-white p-2 flex mb-4 font-semibold text-gray-600  on hover:bg-blue-800">Create</Link>
         <div class="mb-4 w-1/4">
             <select
                 v-model="selectedCategory"
