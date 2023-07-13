@@ -13,43 +13,43 @@ export default {
     },
     props: {
         posts: Object
+    },
+
+    setup() {
+        const selectedCategory = ref('')
+        const orderColumn = ref('created_at')
+        const orderDirection = ref('desc')
+        const { posts, getPosts } = usePosts()
+        const { categories, getCategories } = useCategories()
+
+
+        onMounted(() => {
+            getPosts()
+            getCategories()
+        })
+
+
+        watch(selectedCategory, (current, previous) => {
+            getPosts(1, current)
+        })
+
+        const updateSort = (column) => {
+            orderColumn.value = column;
+            orderDirection.value = (orderDirection.value === 'asc' ? 'desc' : 'asc')
+            getPosts(1, selectedCategory.value, orderColumn.value, orderDirection.value);
+        }
+
+
+        return {
+            posts,
+            getPosts,
+            categories,
+            selectedCategory,
+            orderColumn,
+            orderDirection,
+            updateSort
+        }
     }
-
-    // setup() {
-    //     const selectedCategory = ref('')
-    //     const orderColumn = ref('created_at')
-    //     const orderDirection = ref('desc')
-    //     const { posts, getPosts } = usePosts()
-    //     const { categories, getCategories } = useCategories()
-
-
-    //     onMounted(() => {
-    //         getPosts()
-    //         getCategories()
-    //     })
-
-
-    //     watch(selectedCategory, (current, previous) => {
-    //         getPosts(1, current)
-    //     })
-
-    //     const updateSort = (column) => {
-    //         orderColumn.value = column;
-    //         orderDirection.value = (orderDirection.value === 'asc' ? 'desc' : 'asc')
-    //         getPosts(1, selectedCategory.value, orderColumn.value, orderDirection.value);
-    //     }
-
-
-    //     return {
-    //         posts,
-    //         getPosts,
-    //         categories,
-    //         selectedCategory,
-    //         orderColumn,
-    //         orderDirection,
-    //         updateSort
-    //     }
-    // }
 }
 </script>
     
