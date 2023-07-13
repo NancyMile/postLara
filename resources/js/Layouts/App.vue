@@ -9,13 +9,17 @@ export default {
 }
 </script>
 <template>
-    <div class="sm:flex gap-4 sm:top-0 sm:left-0  p-6 text-right z-10">
+    <div class="sm:flex gap-4 sm:top-0 sm:left-0  p-6 text-right z-10 w-1/2">
         <Link href="posts"
             :class="{'font-bold text-red-500': $page.component === 'Posts/Index'}"
             class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Home</Link>
             <Link href="about"
                 :class="{'font-bold text-red-500': $page.component === 'Posts/About'}"
                 class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">About</Link>
+            <Link href="login"
+                :class="{'ont-bold text-red-500': $page.component === 'login'}"
+                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Login</Link>
+
     </div>
     <div class="overflow-hidden overflow-x-auto p-6 bg-white border-gray-200">
         <div v-if="$page.props.flash.message " class="text-white p-3  uppercase rounded-lg bg-green-300 mb-4 text  font-bold  text-lg text-center">
